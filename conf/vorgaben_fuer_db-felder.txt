@@ -1,0 +1,319 @@
+#------------------------------------------------------------------------------
+# vorgaben_fuer_db-felder.txt
+#
+# This file holds settings for different standard texts like e.g.
+# - rating of comics
+# - storage locations
+# - format of comic books
+#
+# By adding or removing of those settings the pull down menues of the web GUI
+# can easily be adopted.
+#
+# Empty lines are ignored.
+# Lines starting with a hash (#) are handled as comments
+#------------------------------------------------------------------------------
+
+[Pfade]
+# folder holding the scripts = root folder
+./bin/
+# Configuration & settings
+../conf/vorgaben_fuer_db-felder.txt
+# Data of the collection
+../data/$sammlungsname/hefte.txt
+# Path to the covers
+../data/$sammlungsname/cover/
+# Path to the excerpt
+../data/$sammlungsname/leseprobe/
+# Downloadfolder
+../tmp/
+
+[Bewertung]
+0 makellos
+0-1 neuwertig
+1 fast neuwertig
+1-2 gut erhalten
+2 durchschnittlicher Zustand
+2-3 deutliche Gebrauchsspuren
+3 beschädigt / alle Seiten vorhanden
+3-4 stark beschädigt
+4 kaum lesbar
+
+[Eigenschaften]
+1. Auflage
+1. Deutsch - Auflage
+2. Auflage
+3. Auflage
+Buchhandelsausgabe
+Comic - Cover
+Foto - Cover
+Geklammert
+Gelumbeckt
+limitiert
+Poster +
+Presseausgabe
+Prestige-Ausgabe
+schwarz-weiss
+signiert
+Sonderband
+Special
+Standard
+Umschlag aufklappbar
+Variantcover existiert
+Vollfarbig
+
+[Einbandart]
+Hardcover
+Photocover
+Prestige
+Softcover
+Standard
+Variantcover
+
+[Format]
+Album
+Album/US-Format 26x17
+Buch
+Großband
+Heft
+Heft/US-Format 26x17
+Magazin
+Piccolo
+Taschenbuch 18,5x13
+
+[Genre]
+Abenteuer
+Action
+Divers
+Erotik
+Fantasy
+Funny
+Horror
+Krimi
+Mystery
+Ritter
+Science Fiction
+Steampunk
+Superhelden
+Western
+
+[Haendler]
+Buchhandlung VielSeitig Rohe und Pütz oHG
+
+[Inhaltsbewertung]
+keine Auswahl
+hervorragend
+gut/sehr gut
+mittelmäßig
+schlecht
+
+[Lagerort]
+Puffer
+Kiste #001 (Alben)
+Kiste #002 (Hefte)
+Kiste #003 (Hefte)
+Kiste #004 (Alben)
+Kiste #005 (Alben)
+Kiste #006 (Alben)
+Kiste #007 (Alben)
+Kiste #008 (Alben)
+Kiste #009 (Alben)
+Kiste #010 (Hefte)
+Kiste #011 (Alben)
+Kiste #012 (Hefte)
+Kiste #013 (Taschenbücher)
+Kiste #014 (Alben)
+Kiste #015 (Alben)
+Kiste #016 (Alben)
+Kiste #017 (Alben)
+Kiste #018 (Alben)
+Kiste #019 (Alben)
+Kiste #020 (Alben)
+Kiste #021 (Alben)
+Kiste #022 (Alben)
+Kiste #023 (Alben)
+Kiste #024 (Alben)
+
+[Sprache]
+deutsch
+englisch
+französisch
+
+[Status]
+Ausgeliehen
+Bestellt
+Gesucht
+Nicht vorhanden
+Vorhanden
+
+[Verlag]
+Alpha Comic Verlag
+Arboris Verlag
+Bastei Verlag
+Beta Verlag GmbH
+BSE
+comicplus+
+
+[Zustand]
+Ecken geknickt
+Keine Mängel
+Klammern fehlen
+Klammern verrostet
+makellos
+Seiten eingerissen
+Seiten fehlen
+Seiten leicht gewellt
+Seiten stark gewellt
+Umschlag eingerissen
+Umschlag fehlt
+Umschlag gestempelt
+Umschlag leicht gewellt
+Umschlag stark gewellt
+
+# The option [Kopiervorgaben] allows to set which field of the data set are
+# copied over to a new data set.
+# The settings have the following meaning:
+#   0 = do not copy
+#   1 = copy
+#
+[Kopiervorgaben]
+# [0] Heft-Titel
+1
+# [1] Heft-Untertitel
+0
+# [2] Sprache
+1
+# [3] Serien-Nr.
+0
+# [4] Serie von
+1
+# [5] ISBN/Barcode-Nr.
+0
+# [6] Verlag
+1
+# [7] Erstauflage
+0
+# [8] Kaufdatum
+0
+# [9] Originalpreis
+1
+# [10] Einkaufspreis
+0
+# [11] Akt. Handelspreis
+0
+# [12] Händler
+1
+# [13] Bemerkung 1
+0
+# [14] URL
+1
+# [15] Autor(en)
+1
+# [16] Zustand
+1
+# [17] Eigenschaft(en)
+1
+# [18] Bewertung
+1
+# [19] Status
+1
+# [20] Darsteller
+1
+# [21] Einbandart
+1
+# [22] Format
+1
+# [23] Genre
+1
+# [24] Bemerkung 2
+0
+# [25] Exemplare
+1
+# [26] Lagerort
+0
+# [27] Statushinweis
+0
+# [28] Heft-Verweise
+0
+# [29] Seiten
+1
+# [30] Inhalt/Geschichte
+0
+# [31] Rezensionen
+0
+# [32] Inhaltsbewertung
+1
+# [33] Handelspreise
+0
+# [34] Comic-Typ
+1
+# [35] Autor(en) + Job
+1
+# [36] Enthalten in
+1
+# [37] Link zum Cover
+1
+
+[Anzeige-Reihe]
+# Here one can set the display options for comic book data in the web GUI.
+# One can set the table columns, their order and their titles.
+# For each comic book collection the following listed fields [0] to [37] are
+# stored in file 'hefte.txt'.
+# The default titles are listed here...
+# [0] Heft-Titel
+# [1] Heft-Untertitel
+# [2] Sprache
+# [3] Serien-Nr.
+# [4] Serie von
+# [5] ISBN/Barcode-Nr.
+# [6] Verlag
+# [7] Erstauflage
+# [8] Kaufdatum
+# [9] Originalpreis
+# [10] Einkaufspreis
+# [11] Akt. Handelspreis
+# [12] Händler
+# [13] Bemerkung 1
+# [14] URL
+# [15] Autor(en)
+# [16] Zustand
+# [17] Eigenschaft(en)
+# [18] Bewertung
+# [19] Status
+# [20] Darsteller
+# [21] Einbandart
+# [22] Format
+# [23] Genre
+# [24] Bemerkung 2
+# [25] Exemplare
+# [26] Lagerort
+# [27] Statushinweis
+# [28] Heft-Verweise
+# [29] Seiten
+# [30] Inhalt/Geschichte
+# [31] Rezensionen
+# [32] Inhaltsbewertung
+# [33] Handelspreise
+# [34] Comic-Typ
+# [35] Autor(en) + Job
+# [36] Enthalten in
+# [37] Link zum Cover
+# ...to change them just write the field number and the new title in one line.
+# Both information have to be separated by a comma like so:
+# 0, Titel
+# 23
+# ...the above mentioned two lines define a table with two columns. In
+# coulumn 1 the content of field [0] will be displayed getting the new
+# title 'Titel' instead of the default title 'Heft-Titel'.
+# In column 2 the content of field [23] will be displayed getting the
+# default title 'Genre'.
+#
+37, Cover
+0, Titel
+1, Untertitel
+3
+4
+19
+26
+6
+5
+7

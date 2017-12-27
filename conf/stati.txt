@@ -1,0 +1,5 @@
+"ausgeliehen","AG"
+"bestellt","BS"
+"gesucht","GS"
+"nicht vorhanden","NV"
+"vorhanden","V"

@@ -1,0 +1,95 @@
+/* Farb-Schema Gruen
+	#31461c		dunkel
+	#4a6b2a
+	#649138
+	#7db745
+	#97c867		hell
+*/
+
+
+header {
+	background-color:darkorange;
+	padding: 10px 20px 5px 20px;
+	margin: 0px;
+	}
+
+
+header img {
+	float: right;
+	width: 150px;
+}
+
+header ul {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 5px;
+	list-style-type: none;
+}
+
+header li {
+	display: inline;
+	padding: 0px 20px;
+}
+
+header a:link {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+header a:hover {
+	color: #FFFF00;
+}
+
+/* - - - - -  Datenbereich der Comics  - - - - - */
+
+section {
+	background-color: orange;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	padding-left: 1%;
+	width: 84%;
+	float: left;
+}
+
+section tr:nth-child(even) {
+    background-color: yellow;
+}
+
+/* - - - - -  Seitenleiste  - - - - - */
+
+aside {
+	width: 13%;
+	padding: 0% 1%;
+	float: right;
+	background-color:orange;	
+}
+
+aside p {
+	padding-bottom: 0.5%;
+	margin: 0%;
+}
+
+aside p:b {
+	padding-top: 0.5%;
+}
+
+aside a:link {
+	color: black;
+	text-decoration: none;
+}
+
+aside a:hover {
+	color: #FFFF00;
+}
+
+/* - - - - -  Fusszeile  - - - - - */
+
+footer {
+	background-color: darkorange;
+	clear:both;
+}
+
+footer table {
+	padding: 0.5% 1%;
+}
