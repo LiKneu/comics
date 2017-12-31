@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico" />
+    <link rel="shortcut icon" href="../graphics/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../css/comics.css" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Volker Thomas">
+    <script src="../js/comicScripts.js"></script>
+    <title>New series</title>
+</head>
+<body>
+
+<h1>Create new series</h1>
+
+<h2>Hint</h2>
+<p>While you are typing in the name of the series, all letters, which are not allowed for a folder name, are replaced/skipped.</p>
+<p>You can modify the folder name as you wish, after you have finished the input of the name of the series.</p>
+
+<h2>New name of series and folder</h2>
+<form action="/comictest/bin/sammlung_neu.pl" method="GET">
+    <table border="0" cellspacing="0" cellpadding="2">
+        <tr>
+            <td>Name of the series: </td>
+            <td><input id="input_series" onkeyup="getFolderName(document.getElementById('input_series').value)" type="text" name="series" size="100" value="<TMPL_VAR SERIES>"></td>
+        </tr>
+        <tr>
+            <td>Name of the folder: </td>
+            <td><input id="input_folder" type="text" name="folder" size="100" value="<TMPL_VAR FOLDER>"></td>
+        </tr>
+        <tr>
+            <!-- use Javascript to place the values of the input fields into the URL -->
+            <td><a id="lnk_create_series" onmousedown="callPerlNewSeries()" href="">create series</a></td>
+        </tr>
+    </table>
+</form>
+
+<hr>
+
+<h2>Status information</h2>
+
+</body>
+</html>
