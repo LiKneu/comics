@@ -13,6 +13,12 @@ function getFolderName( series_name ) {
     folderName = folderName.replace(/[,;.:#'+*~!?"§$%&/()={}\\`´]/g,"");
     // replace all whitespace with '_'
     folderName = folderName.replace(/\s+/g, "_");
+    // replace German Umlaute
+    folderName = folderName.replace(/ä/g, "ae");
+    folderName = folderName.replace(/ö/g, "oe");
+    folderName = folderName.replace(/ü/g, "ue");
+    folderName = folderName.replace(/ß/g, "ss");
+
     document.getElementById('input_folder').value = folderName;
 }
 
