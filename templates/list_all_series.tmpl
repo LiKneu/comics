@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../css/comics.css" />
     <meta name="robots" content="noindex, nofollow">
     <meta name="author" content="LiKneu">
+    <script src="../js/comicScripts.js"></script>
     <title>All series</title>
 </head>
 <body>
@@ -13,7 +14,11 @@
 <h2>Comics data base</h2>
 <h1>List of all available series</h1>
 
-<table frame="border" rules="all" cellpadding="3" cellspacing="1">
+<p>
+<input type="text" id="searchInput" onkeyup="filterSeriesTable()" placeholder="Search for series..">
+</p>
+
+<table id="tableOfSeries" frame="border" rules="all" cellpadding="3" cellspacing="1">
     <colgroup>
         <col width="400">
         <col width="400">
