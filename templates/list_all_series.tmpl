@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="../graphics/favicon.ico" />
+    <link rel="shortcut icon" href="../graphics/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../css/comics.css" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="LiKneu">
+    <title>All series</title>
+</head>
+<body>
+
+<h2>Comics data base</h2>
+<h1>List of all available series</h1>
+
+<table frame="border" rules="all" cellpadding="3" cellspacing="1">
+    <colgroup>
+        <col width="400">
+        <col width="400">
+        <col width="45">
+    </colgroup>
+    <tr>
+        <th align="left">Series</th>
+        <th align="left">Folder</th>
+        <th align="left">Complete</th>
+        <th align="left">Info</th>
+    </tr>
+    <TMPL_LOOP SERIES_DATA alias="series">
+    <tr>
+        <td><TMPL_VAR series.series ></td>
+        <td><TMPL_VAR series.folder ></td>
+        <td><TMPL_VAR series.complete></td>
+        <td align="center">
+            <a href="./seriezeigen.pl?Verzeichnis=<TMPL_VAR series.folder >" target="_blank">
+                <img title="show" alt="show" src="../graphics/info.png" width="16" height="16">
+            </a>
+        </td>
+    </tr>
+    </TMPL_LOOP>
+</table>
+
+<footer>
+    <hr>
+    <p>&copy; 2018-01-01 LiKneu</p>
+</footer>
+</body>
+</html>
