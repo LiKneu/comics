@@ -1,4 +1,4 @@
-package DatabaseFunctionsCSV;
+package bin::DatabaseFunctionsCSV;
 #-------------------------------------------------------------------------------
 #   Package holds functions needed to handle comic book information stored
 #   in CSV file hefte.txt
@@ -8,7 +8,8 @@ use strict;
 use warnings;
 use 5.24.0;
 
-use Text::CSV;
+use Text::CSV qw( csv );
+use Path::Tiny;
 
 require Exporter;
 
@@ -16,8 +17,13 @@ our @ISA = qw ( Exporter );
 
 our @EXPORT = qw (
     get_series_name_from_CSV
+    csv_2_AoH
     );
 
+#-------------------------------------------------------------------------------
+#   Reads a CSV file and returns the name of the comic series if available.
+#   Returns undef if no series name can be found.
+#
 sub get_series_name_from_CSV {
     my $path_to_CSV = shift;
 
@@ -49,6 +55,20 @@ sub get_series_name_from_CSV {
         # Maybe only excerpts (Leseproben) existieren.
         return undef;
     }
+}
+
+#-------------------------------------------------------------------------------
+#   Reads the comic book series into an array of hashes
+#
+sub csv_2_AoH {
+    my $path_to_series = shift;
+
+    my $path_to_hefte = path( $path_to_series )->child("hefte.txt")->canonpath;
+
+    my $AoH = csv ({ in => $path_to_hefte, headers => "auto", encoding => "cp1252" }) or
+        die Text::CSV->error_diag;
+
+    return $AoH;
 }
 
 1;
