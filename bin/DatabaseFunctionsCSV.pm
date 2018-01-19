@@ -1,4 +1,5 @@
-package bin::DatabaseFunctionsCSV;
+package DatabaseFunctionsCSV;
+
 #-------------------------------------------------------------------------------
 #   Package holds functions needed to handle comic book information stored
 #   in CSV file hefte.txt
@@ -28,7 +29,8 @@ sub get_series_name_from_CSV {
     my $path_to_CSV = shift;
 
     # read the whole series line by line into an array holding the issues
-    open (SERIES, "<", $path_to_CSV) or die "Couldn't open $path_to_CSV: $?";
+    # CAUTION: the old CSV files were stored in Windows encoding (cp1252)
+    open (SERIES, "<:encoding(cp1252)", $path_to_CSV) or die "Couldn't open $path_to_CSV: $?";
     my @issues = <SERIES>;
     close(SERIES);
 
