@@ -1,0 +1,14 @@
+<header>
+    <img src="../graphics/cubitus_links.png" />
+    
+    <h1><%= TITLE %></h1>
+    
+    <nav>
+        <ul>
+            <li><a href="./comics_navi.pl">HOME</a></li>
+            <li><a href="./list_all_series.pl">COLLECTION</a></li>
+            <li><a href="./durchsuche_index.pl">SEARCH</a></li>
+            <li><a href="./einstellungen.pl">SETTINGS</a></li>
+        </ul>
+    </nav>
+</header>
