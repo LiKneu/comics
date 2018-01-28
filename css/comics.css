@@ -42,8 +42,14 @@ header a:hover {
 /* - - - - -  data section of the comics  - - - - - */
 
 section {
-	padding-top: 1%;
-	padding-bottom: 1%;
+	/* padding-top is needed to prevent that the content of section is hidden
+	   behind the header */
+	padding-top: 150px;
+
+	/* padding-bottom is needed to prevent that the footer overlaps the content
+	   of the section */
+	padding-bottom: 200px;
+
 	padding-left: 1%;
 	width: 84%;
 	float: left;
@@ -79,6 +85,15 @@ aside a:hover {
 	color: #FFFF00;
 }
 
+li {
+    /* give some space after each element of the bullet list */
+    padding-bottom: 10px;
+
+    /* removes the bullets in front of the bullet list
+       mainly needed for comics_navi */
+    list-style-type: none;
+}
+
 /* - - - - -  footer  - - - - - */
 
 footer {
@@ -86,7 +101,8 @@ footer {
 	clear:both;
 	position: fixed;
 	bottom: 0;
-	width: 99%;
+	width: 97%;
+	padding: 10px 20px 10px 20px;
 }
 
 footer table {
