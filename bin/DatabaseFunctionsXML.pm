@@ -22,6 +22,8 @@ require Exporter;
 our @ISA = qw ( Exporter );
 
 our @EXPORT = qw (
+    read_series_XML_2_DOM
+    calculate_sum_prices
     get_series_name
     get_series_names
     convert_series_field_names
@@ -29,11 +31,10 @@ our @EXPORT = qw (
     );
 
 #-------------------------------------------------------------------------------
-#   Gets the name of the series from file series.xml
+#   Reads the xml file of the series into a DOM structure
 #
-sub get_series_name {
+sub read_series_XML_2_DOM {
     my $path_to_series = shift;
-    my $series_name;
 
     my $dom = XML::LibXML->load_xml(location => $path_to_series);
 
@@ -42,9 +43,86 @@ sub get_series_name {
     my $pp = XML::LibXML::PrettyPrint->new();
     $pp->strip_whitespace($dom);
 
-    $series_name = $dom->findvalue('/series/name');
+    return $dom;
+}
 
-    return $series_name;
+#-------------------------------------------------------------------------------
+#   Calculates the sum of the money depending on the field name which is given
+#   as parameter e.g. 'price', 'price_bought', 'present_price_trade'
+#
+sub calculate_sum_prices {
+    # TODO: Make handling of different currencies configurable (exchange rate)
+    my $dom = shift;    # DOM structure of the series
+    my $field = shift;  # field which has to be summed up
+
+    my @warnings_issue;     # array which will hold information about incomplete data
+                            # set information like exchange rates or missing prices
+    my @warnings_currency;  # same like above but for unknown currencies
+
+    my $sum = 0;
+    foreach my $issue ( $dom->findnodes ( '//issue' ) ) {
+        my $hit = $issue->findvalue ( './' . $field );
+        my $issue_no = $issue->findvalue ( './number');
+
+        # the prices are stored as strings including the currency
+        # so before calculation the sum we have to split the numbers
+        # from the currency information
+        my ( $price, $currency ) = split / /, $hit;
+
+        # if there seems to be price information starting with a number
+        if ( $price && $price =~ /^[1-9]/ ) {
+            # to allow perl the summation w/o throwing a warning we have to
+            # replace , by .
+            $price =~ s/,/\./;  # replace , by . to show perl that price is number
+
+            # handle different currencies besides EUR
+            if ( $currency ) {
+                if ($currency =~ 'DEM') {
+                    $price *= 0.51129;
+                    $sum += $price
+                }
+                elsif ($currency =~ 'EUR') {
+                    $sum += $price;
+                }
+                else {
+                    push @warnings_currency, $currency;
+                }
+            }
+        }
+        # otherwise the price seems not to be a valid price or doesn't exist
+        else {
+            # no price available - so add issue number to warning array
+            push (@warnings_issue, $issue_no);
+        }
+    }
+
+    $sum = sprintf "%.2f Euro", $sum;
+    # replace . by , to show the sum of prices as it is expected by Europeans
+    $sum =~ s/\./,/;
+
+    my $missing_issue_price;
+    if ( @warnings_issue ) {
+        $missing_issue_price = join ', ', @warnings_issue;
+        $missing_issue_price = 'Prices for following issues are missing: '
+            . $missing_issue_price;
+    }
+
+    my $missing_currency;
+    if ( @warnings_currency ) {
+        $missing_currency = join ', ', @warnings_currency;
+        $missing_currency = 'Exchange rates for following currencies missing: '
+            . $missing_currency;
+    }
+
+    return $sum, $missing_issue_price, $missing_currency;
+}
+
+#-------------------------------------------------------------------------------
+#   Gets the name of the series from file series.xml
+#
+sub get_series_name {
+    my $series_dom = shift;
+    return $series_dom->findvalue('/series/name');
 }
 
 #-------------------------------------------------------------------------------
@@ -70,7 +148,8 @@ sub get_series_names {
 
         # if a XML file exist get the series name from it...
         if ( path($xml_file)->exists ) {
-            $series_name = get_series_name( $xml_file );
+            my $series_dom = read_series_XML_2_DOM( $xml_file );
+            $series_name = $series_dom->findvalue('/series/name');
             push @series_names, {series => $series_name, folder => $folder_name};
         }
         # otherwise use the 'deprecated' file hefte.txt to get the series name
@@ -120,12 +199,10 @@ sub AoH_2_XML {
 
     # if a filename is given store XML structure to disc
     if ( $filename ) {
-
         # format xml file so that is easier to read by humans
         my $pp = XML::LibXML::PrettyPrint->new();
         $pp->pretty_print($dom); # modified in-place
 
-#        open my $out, '>:utf8', $filename or die "Couldn't open $filename: $!";
         open my $out, '>', $filename or die "Couldn't open $filename: $!";
         print $out $dom->toString;
         close $out;
