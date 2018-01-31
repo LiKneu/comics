@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<field_mapping_table>
+    <title>
+        <comic_keeper>Heft-Titel</comic_keeper>
+    </title>
+    <sub_title>
+        <comic_keeper>Heft-Untertitel</comic_keeper>
+    </sub_title>
+    <language>
+        <comic_keeper>Sprache</comic_keeper>
+    </language>
+    <number>
+        <comic_keeper>Serien-Nr.</comic_keeper>
+        <splitter>Band</splitter>
+    </number>
+    <number_of>
+        <comic_keeper>Serie von</comic_keeper>
+        <splitter>Band</splitter>
+    </number_of>
+    <ISBN_barcode>
+        <comic_keeper>ISBN/Barcode-Nr.</comic_keeper>
+        <splitter>ISBN</splitter>
+    </ISBN_barcode>
+    <publisher>
+        <comic_keeper>Verlag</comic_keeper>
+    </publisher>
+    <first_edition>
+        <comic_keeper>Erstauflage</comic_keeper>
+        <splitter>erscheint am:</splitter>
+    </first_edition>
+    <date_bought>
+        <comic_keeper>Kaufdatum</comic_keeper>
+    </date_bought>
+    <price>
+        <comic_keeper>Originalpreis</comic_keeper>
+    </price>
+    <price_bought>
+        <comic_keeper>Einkaufspreis</comic_keeper>
+    </price_bought>
+    <present_price_trade>
+        <comic_keeper>Akt. Handelspreis</comic_keeper>
+    </present_price_trade>
+    <trader>
+        <comic_keeper>Händler</comic_keeper>
+    </trader>
+    <remarks_1>
+        <comic_keeper>Bemerkung 1</comic_keeper>
+    </remarks_1>
+    <url>
+        <comic_keeper>URL</comic_keeper>
+    </url>
+    <authors>
+        <comic_keeper>Autor(en)</comic_keeper>
+    </authors>
+    <condition_description>
+        <comic_keeper>Zustand</comic_keeper>
+    </condition_description>
+    <properties>
+        <comic_keeper>Eigenschaft(en)</comic_keeper>
+    </properties>
+    <rating_condition>
+        <comic_keeper>Bewertung</comic_keeper>
+    </rating_condition>
+    <status>
+        <comic_keeper>Status</comic_keeper>
+    </status>
+    <actors>
+        <comic_keeper>Darsteller</comic_keeper>
+    </actors>
+    <cover_type>
+        <comic_keeper>Einbandart</comic_keeper>
+        <splitter>Einband</splitter>
+    </cover_type>
+    <format>
+        <comic_keeper>Format</comic_keeper>
+    </format>
+    <genre>
+        <comic_keeper>Genre</comic_keeper>
+    </genre>
+    <remarks_2>
+        <comic_keeper>Bemerkung 2</comic_keeper>
+    </remarks_2>
+    <copies>
+        <comic_keeper>Exemplare</comic_keeper>
+    </copies>
+    <storage_location>
+        <comic_keeper>Lagerort</comic_keeper>
+    </storage_location>
+    <status_hint>
+        <comic_keeper>Statushinweis</comic_keeper>
+    </status_hint>
+    <links>
+        <comic_keeper>Heft-Verweise</comic_keeper>
+    </links>
+    <pages>
+        <comic_keeper>Seiten</comic_keeper>
+    </pages>
+    <story>
+        <comic_keeper>Inhalt/Geschichte</comic_keeper>
+    </story>
+    <reviews>
+        <comic_keeper>Rezensionen</comic_keeper>
+    </reviews>
+    <rating_content>
+        <comic_keeper>Inhaltsbewertung</comic_keeper>
+    </rating_content>
+    <price_trading>
+        <comic_keeper>Handelspreise</comic_keeper>
+    </price_trading>
+    <comic_type>
+        <comic_keeper>Comic-Typ</comic_keeper>
+    </comic_type>
+    <authors_jobs>
+        <comic_keeper>Autor(en) + Job</comic_keeper>
+    </authors_jobs>
+    <contained_in>
+        <comic_keeper>Enthalten in</comic_keeper>
+    </contained_in>
+    <cover_link>
+        <comic_keeper>Link zum Cover</comic_keeper>
+    </cover_link>
+</field_mapping_table>
