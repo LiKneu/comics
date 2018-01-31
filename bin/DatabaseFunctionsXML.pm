@@ -24,6 +24,7 @@ our @ISA = qw ( Exporter );
 our @EXPORT = qw (
     read_series_XML_2_DOM
     calculate_sum_prices
+    is_series_complete
     get_series_name
     get_series_names
     convert_series_field_names
@@ -115,6 +116,50 @@ sub calculate_sum_prices {
     }
 
     return $sum, $missing_issue_price, $missing_currency;
+}
+
+#-------------------------------------------------------------------------------
+#   Evaluates whether a series is complete i.e. for each of all possible
+#   issues at least one comic book is available on stock.
+#
+sub is_series_complete {
+    my $dom = shift;
+
+    # get the biggest number of issues which belong to this series
+    my $max_number_of = 0;
+    foreach my $issue ( $dom->findnodes ( '//issue' ) ) {
+        my $number_of = $issue->findvalue ( './number_of' );
+        $max_number_of = $number_of if $number_of > $max_number_of
+    }
+
+    # for each issue which should be available in the series generate
+    # a key in the hash
+    my %should_have_issues;
+    foreach ( 1..$max_number_of ) {
+        $should_have_issues{$_} = '';
+    }
+
+    # for existing issues remove the key from the hash
+    foreach my $issue ( $dom->findnodes ( '//issue' ) ) {
+        my $issue_status = $issue->findvalue ( './status' );
+
+        # TODO: make the word, which indicates availability of an issue configurable
+        if (  $issue_status =~ /vorhanden/i ) {
+
+            # get the number of the existing issue
+            my $issue_number = $issue->findvalue ( './number' );
+
+            # remove the issue from the hash
+            delete $should_have_issues{ $issue_number };
+        }
+    }
+
+    # let's see which issues are missing in the series by finding out
+    # which keys are still available in the hash
+    my @missing = sort ( { $a <=> $b } keys %should_have_issues );
+
+    # return missing issues
+    return \@missing;
 }
 
 #-------------------------------------------------------------------------------
@@ -244,8 +289,8 @@ sub read_mapping {
 #   into the standardized English ones if necessary.
 #   It is assumed that the user hands over a mapping fitting to the data
 sub convert_series_field_names {
-    my $data = shift;       # the AoH of series information
-    my $mapping_table = shift;    # the hash holding the mapping rules
+    my $data = shift;           # the AoH of series information
+    my $mapping_table = shift;  # the hash holding the mapping rules
 
     my $mapped_data = [];   # array which will hold the data with standard
                             # English field names
