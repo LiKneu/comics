@@ -25,6 +25,7 @@ our @EXPORT = qw (
     read_series_XML_2_DOM
     calculate_sum_prices
     is_series_complete
+    get_number_of_issues
     get_series_name
     get_series_names
     convert_series_field_names
@@ -123,13 +124,33 @@ sub calculate_sum_prices {
 #   issues at least one comic book is available on stock.
 #
 sub is_series_complete {
-    my $dom = shift;
+    my $series_dom = shift;
+
+    my @missing;    # array which will hold the numbers of the missing issues
+                    # if max number of issues can't be determined the array will
+                    # hold an error message in $missing[0]
+
+    # determine how many of the issue titles are available
+    my $available_issues;
+    foreach my $status ( $series_dom->findnodes ( '//status') ) {
+        $available_issues ++ if $status->to_literal =~ /vorhanden/i;
+    }
 
     # get the biggest number of issues which belong to this series
     my $max_number_of = 0;
-    foreach my $issue ( $dom->findnodes ( '//issue' ) ) {
+    foreach my $issue ( $series_dom->findnodes ( '//issue' ) ) {
         my $number_of = $issue->findvalue ( './number_of' );
-        $max_number_of = $number_of if $number_of > $max_number_of
+        if ( $number_of ) {
+            $max_number_of = $number_of if $number_of > $max_number_of
+        }
+    }
+
+    # if we have a bigger number of issue titles in the collection than
+    # the max number of issues, we know that something is wrong
+    # so we can't determin whether the series is complete or not
+    if ( $available_issues > $max_number_of ) {
+        push @missing, "can't determine completeness";
+        return \@missing;
     }
 
     # for each issue which should be available in the series generate
@@ -140,7 +161,7 @@ sub is_series_complete {
     }
 
     # for existing issues remove the key from the hash
-    foreach my $issue ( $dom->findnodes ( '//issue' ) ) {
+    foreach my $issue ( $series_dom->findnodes ( '//issue' ) ) {
         my $issue_status = $issue->findvalue ( './status' );
 
         # TODO: make the word, which indicates availability of an issue configurable
@@ -156,10 +177,29 @@ sub is_series_complete {
 
     # let's see which issues are missing in the series by finding out
     # which keys are still available in the hash
-    my @missing = sort ( { $a <=> $b } keys %should_have_issues );
+    @missing = sort ( { $a <=> $b } keys %should_have_issues );
 
     # return missing issues
     return \@missing;
+}
+
+#-------------------------------------------------------------------------------
+#   Gets the total number of issues on stock which belong to a series.
+#   CAUTION: The number includes doublettes (not only unique titles)
+#
+sub get_number_of_issues {
+    my $series_dom = shift;
+
+    my $number_of_issues = 0;
+    foreach my $issue ( $series_dom->findnodes ( '//issue' ) ) {
+        # TODO: make the word, which indicates availability of an issue configurable
+        if ( $issue->findvalue ( './status' ) =~ /vorhanden/i ) {
+            my $copies = $issue->findvalue ( './copies' );
+            $number_of_issues += $copies if $copies;
+        }
+    }
+
+    return $number_of_issues;
 }
 
 #-------------------------------------------------------------------------------
